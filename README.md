@@ -29,6 +29,7 @@ Actualmente la configuracion se obtiene desde una llamada a `ConfiguracioAplicac
 
 Ver:
 
+- `docs/objetivos-proyecto.md`
 - `docs/decisiones-tecnicas.md`
 - `config/config-valors.example.json`
 

@@ -22,6 +22,7 @@ Este repositorio contiene el servicio `ServidorDicomFHES`, una aplicacion Spring
 ## Archivos De Contexto
 
 - `README.md`: resumen rapido para abrir el proyecto.
+- `docs/objetivos-proyecto.md`: vision y fases del proyecto real.
 - `docs/contexto-proyecto.md`: arquitectura y flujo funcional.
 - `docs/decisiones-tecnicas.md`: decisiones tomadas o propuestas.
 - `docs/codex-notes.md`: notas de continuidad para trabajar desde varios equipos.
