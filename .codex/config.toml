@@ -1,0 +1,15 @@
+# Configuracion de proyecto para Codex.
+# Mantener este archivo sin credenciales ni rutas personales.
+
+[project]
+name = "ServidorDicomFHES"
+description = "Servidor/intermediario DICOM y HL7 para FHES"
+
+[context]
+read_first = [
+  "AGENTS.md",
+  "README.md",
+  "docs/contexto-proyecto.md",
+  "docs/decisiones-tecnicas.md",
+  "docs/codex-notes.md"
+]
