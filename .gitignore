@@ -1,7 +1,8 @@
 HELP.md
 target/
 logs/
-202607*/
+codex-transcripts/
+2026*/
 .svn/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
