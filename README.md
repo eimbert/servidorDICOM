@@ -33,6 +33,22 @@ Ver:
 - `docs/decisiones-tecnicas.md`
 - `config/config-valors.example.json`
 
+La ruta del fallback se configura con `CONFIG_VALORS_FILE`. Si la carga remota falla, esta lista JSON se carga con la misma estructura de `ConfigValorDTO`; si ambas fuentes fallan, el servicio no levanta servidores DICOM con valores incompletos.
+
+## Opinion IA Experimental
+
+El endpoint `POST /ServidorDicomFHES/ai/opinion` recibe una unica imagen PNG renderizada y anonimizada, su tipo (`IMAGE` o `ECG`) y una pregunta sin datos identificativos. Nunca recibe el DICOM original.
+
+Configuracion:
+
+```properties
+ai.openai.api-key=${OPENAI_API_KEY:}
+ai.openai.model=${OPENAI_MODEL:gpt-5.6-terra}
+ai.openai.enabled=${OPENAI_ENABLED:true}
+```
+
+No se debe escribir ni versionar la clave real en `application.properties` o en el JSON de fallback.
+
 ## Trabajo Desde Varios Equipos
 
 El proyecto debe sincronizarse mediante Git:

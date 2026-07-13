@@ -19,6 +19,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fhes.cat.config.APIConstants;
+import fhes.cat.configuration.ConfigurationFallbackLoader;
 import fhes.cat.dmdcm4che3.DicomServer;
 import fhes.cat.dmdcm4che3.HL7Server;
 import fhes.cat.dto.ConfigValorDTO;
@@ -38,6 +39,9 @@ public class Configuracio extends BaseServiceImpl implements InitializingBean {
 	
 	@Autowired
 	private HL7Server hl7Server;
+
+	@Autowired
+	private ConfigurationFallbackLoader configurationFallbackLoader;
 	
 	ObjectMapper mapper = new ObjectMapper();
 	
@@ -149,6 +153,7 @@ public class Configuracio extends BaseServiceImpl implements InitializingBean {
 		//Carreguem la configuració de l'aplicació
 		log.info("Cargando configuración");
 		log.info("Variable PROFILE_SERVER: "+obtenirVariableEntorn("PROFILE_SERVER"));
+		boolean remoteConfigurationLoaded = false;
 		try { 
 			log.info("Carregar configuració: "+obtainString(urlConfiguracioDev, urlConfiguracioProduccio));
 			
@@ -167,6 +172,7 @@ public class Configuracio extends BaseServiceImpl implements InitializingBean {
 		    		listConfiguracio = listConfig;
 		    		// Configurem els llistats del socket
 		    		configurarLlistatsSocket();
+					remoteConfigurationLoaded = true;
 		    		
 		    	}
 		    }
@@ -174,10 +180,27 @@ public class Configuracio extends BaseServiceImpl implements InitializingBean {
 			log.error("Error al consultar la configuració: "+e.getMessage());
 			socketService.notificarMissatge(SocketServiceImpl.MISSATGE_INFO, SERVIDOR_DICOM_FHES, "Error al consultar la configuració: "+e.getMessage());
 		}
+
+		if (!remoteConfigurationLoaded) {
+			try {
+				listConfiguracio = configurationFallbackLoader.load();
+				configurarLlistatsSocket();
+				log.warn("Configuracion cargada desde fallback JSON: {}", configurationFallbackLoader.getConfigurationFile());
+			} catch (Exception fallbackError) {
+				log.error("No se pudo cargar la configuracion remota ni el fallback JSON", fallbackError);
+				throw new IllegalStateException("Configuracion DICOM no disponible", fallbackError);
+			}
+		}
 	}
 	
 	private void configurarLlistatsSocket() {
 		log.info("******************** BUSCANDO CONFIG *****************************");
+		APIConstants.capacidadTransferencia.clear();
+		APIConstants.presentationContext.clear();
+		APIConstants.capacidadTransferenciaFind.clear();
+		APIConstants.capacidadTransferenciaMpps.clear();
+		APIConstants.servidores.clear();
+		APIConstants.listaMapeosTags.clear();
 		
 		for(ConfigValorDTO cv : listConfiguracio) {
 			if(cv.getCamp() != null && cv.getCamp().contentEquals(CAPACIDAD_TRANSFERENCIA)) {
