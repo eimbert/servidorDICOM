@@ -20,7 +20,7 @@ public class OpenAiProperties {
     private long maxImageBytes;
 
     public boolean isEnabled() { return enabled; }
-    public String getApiKey() { return apiKey; }
+    public String getApiKey() { return apiKey == null ? "" : apiKey.trim(); }
     public String getModel() { return model; }
     public String getUrl() { return url; }
     public int getTimeoutSeconds() { return timeoutSeconds; }

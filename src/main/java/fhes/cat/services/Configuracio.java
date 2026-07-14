@@ -177,15 +177,19 @@ public class Configuracio extends BaseServiceImpl implements InitializingBean {
 		    	}
 		    }
 		} catch (Exception e) {
-			log.error("Error al consultar la configuració: "+e.getMessage());
-			socketService.notificarMissatge(SocketServiceImpl.MISSATGE_INFO, SERVIDOR_DICOM_FHES, "Error al consultar la configuració: "+e.getMessage());
+			log.warn("Configuracion DICOM BBDD remota no disponible: "+e.getMessage());
+			try {
+				socketService.notificarMissatge(SocketServiceImpl.MISSATGE_INFO, SERVIDOR_DICOM_FHES, "Configuracion DICOM BBDD remota no disponible: "+e.getMessage());
+			} catch (Exception notificationError) {
+				log.warn("No se pudo notificar el error de configuracion remota", notificationError);
+			}
 		}
 
 		if (!remoteConfigurationLoaded) {
 			try {
 				listConfiguracio = configurationFallbackLoader.load();
 				configurarLlistatsSocket();
-				log.warn("Configuracion cargada desde fallback JSON: {}", configurationFallbackLoader.getConfigurationFile());
+				log.warn("Configuracion cargada desde local JSON: {}", configurationFallbackLoader.getConfigurationFile());
 			} catch (Exception fallbackError) {
 				log.error("No se pudo cargar la configuracion remota ni el fallback JSON", fallbackError);
 				throw new IllegalStateException("Configuracion DICOM no disponible", fallbackError);

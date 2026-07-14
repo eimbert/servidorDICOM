@@ -1,0 +1,72 @@
+[
+  {
+    "id": 27,
+    "idApp": 3,
+    "camp": "SERVER_STORAGE_INTERN",
+    "valor1": "211",
+    "valor2": "SDFHES",
+    "descripcio": "Servidor storage DICOM interno",
+    "encriptat": null,
+    "tipus": "SERVER"
+  },
+  {
+    "id": 31,
+    "idApp": 3,
+    "camp": "ATITLE_PACS",
+    "valor1": "PACS_AETITLE",
+    "valor2": null,
+    "descripcio": "AETitle del PACS",
+    "encriptat": null,
+    "tipus": null
+  },
+  {
+    "id": 30,
+    "idApp": 3,
+    "camp": "IP_PACS",
+    "valor1": "192.0.2.10",
+    "valor2": null,
+    "descripcio": "IP o hostname del PACS",
+    "encriptat": null,
+    "tipus": null
+  },
+  {
+    "id": 29,
+    "idApp": 3,
+    "camp": "PORT_PACS",
+    "valor1": "104",
+    "valor2": null,
+    "descripcio": "Puerto DICOM del PACS",
+    "encriptat": null,
+    "tipus": null
+  },
+  {
+    "id": 44,
+    "idApp": 3,
+    "camp": "CAPACIDAD_TRANSFERENCIA",
+    "valor1": "Verification SOP Class",
+    "valor2": "1.2.840.10008.1.1",
+    "descripcio": "Negociar asociacion DICOM",
+    "encriptat": null,
+    "tipus": null
+  },
+  {
+    "id": 339,
+    "idApp": 3,
+    "camp": "PRESENTATION_CONTEXT",
+    "valor1": "1.2.840.10008.1.1",
+    "valor2": "1.2.840.10008.1.2.1",
+    "descripcio": "Verification SOP Class con Explicit VR Little Endian",
+    "encriptat": null,
+    "tipus": null
+  },
+  {
+    "id": 5,
+    "idApp": 3,
+    "camp": "AccessionNumber",
+    "valor1": "524368",
+    "valor2": "SH",
+    "descripcio": "Mapeo de tag DICOM por modalidad",
+    "encriptat": null,
+    "tipus": "ECG"
+  }
+]
